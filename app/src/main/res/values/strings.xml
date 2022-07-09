@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Puremetry</string>
+    <string name="startButton">Start</string>
+    <string name="resultsButton">Results</string>
 </resources>
