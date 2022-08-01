@@ -1,21 +1,24 @@
 package com.example.puremetry;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainUI extends AppCompatActivity implements View.OnClickListener{
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainUI extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_ui);
+
+        // Hide title bar
         getSupportActionBar().hide();
 
-        Button startButton = (Button) findViewById(R.id.startButton);
-        Button resultsButton = (Button) findViewById(R.id.resultsButton);
+        // Set OnClickListener for button
+        Button startButton = findViewById(R.id.startButton);
+        Button resultsButton = findViewById(R.id.resultsButton);
 
         startButton.setOnClickListener(this);
         resultsButton.setOnClickListener(this);
@@ -23,7 +26,7 @@ public class MainUI extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.startButton:
                 selectProfiles();
                 break;
@@ -33,11 +36,11 @@ public class MainUI extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    public void selectProfiles(){
+    public void selectProfiles() {
         MainController.loadProfilesList(this);
     }
 
-    public void selectResults(){
+    public void selectResults() {
         MainController.loadReportsList(this);
     }
 

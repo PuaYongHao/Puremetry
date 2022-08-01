@@ -2,4 +2,8 @@
     <string name="app_name">Puremetry</string>
     <string name="startButton">Start</string>
     <string name="resultsButton">Results</string>
+    <string name="nameLabel">Name</string>
+    <string name="dobLabel">Date Of Birth (dd/MM/yyyy)</string>
+    <string name="nricLabel">NRIC/FIN</string>
+    <string name="doneButton">Done</string>
 </resources>

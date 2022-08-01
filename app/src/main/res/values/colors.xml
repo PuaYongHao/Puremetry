@@ -3,8 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#F2F2F2</color>
+    <color name="silver">#BBBBBB</color>
     <color name="blue_end">#055ADA</color>
     <color name="blue_start">#0091EA</color>
     <color name="blue_light">#64C1FF</color>
     <color name="blue_dark">#0064B7</color>
+    <color name="light_grayish_blue">#C8E7F5</color>
+    <color name="light_grayish_pink">#F6D2E0</color>
+    <color name="clicked_light_grayish_blue">#87CBE9</color>
+    <color name="clicked_light_grayish_pink">#E992B4</color>
 </resources>
