@@ -3,10 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable-v24/grayish_pink_button.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/blue_round_button.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/create_profile.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/grayish_blue_button.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/ic_baseline_chevron_left_24.xml" value="0.1245" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/ic_launcher_background.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/left_arrow.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/logo_background.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/round_button.xml" value="0.2265" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/tes.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/white_round_button.xml" value="0.1245" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/white_round_edittext.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_chat_bot_ui.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_profiles_list_ui.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_main_ui.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_profile_ui.xml" value="0.6" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_profiles_list_ui.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_reports_list_ui.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/profiles_list.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/mipmap-anydpi-v26/logo.xml" value="0.177" />
       </map>
     </option>
   </component>
