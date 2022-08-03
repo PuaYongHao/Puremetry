@@ -98,7 +98,8 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
     }
 
     public void selectProfile(int index) {
-        ProfilesListController.loadProfile(this, profiles, index);
+        Profile profile = profiles.get(index);
+        ProfilesListController.loadProfile(this, profile);
     }
 
     public void deleteProfile(int index) {

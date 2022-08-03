@@ -13,8 +13,8 @@ public class ProfileController {
         return profile;
     }
 
-    public static void loadChatBot(Context context){
-        Intent i = new Intent(context, ChatBotUI.class);
+    public static void loadHistoryTaking(Context context){
+        Intent i = new Intent(context, HistoryTakingUI.class);
         context.startActivity(i);
     }
 
