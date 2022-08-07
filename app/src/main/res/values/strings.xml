@@ -6,4 +6,6 @@
     <string name="dobLabel">Date Of Birth (dd/MM/yyyy)</string>
     <string name="nricLabel">NRIC/FIN</string>
     <string name="doneButton">Done</string>
+    <string name="inputLabel">Input</string>
+    <string name="submitButton">Submit</string>
 </resources>

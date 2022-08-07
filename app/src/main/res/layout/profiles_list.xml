@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants" >
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="@drawable/cardview_click_effect"
+    app:cardBackgroundColor="@color/gray"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    app:cardMaxElevation="3dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@+id/removeButton"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/genderIcon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -30,19 +37,19 @@
                     android:id="@+id/nameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/nameLabel"
-                    android:textColor="@color/black"
+                    android:autoSizePresetSizes="@array/autosize_text_sizes"
                     android:autoSizeTextType="uniform"
-                    android:autoSizePresetSizes="@array/autosize_text_sizes"/>
+                    android:text="@string/nameLabel"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/dobText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dobLabel"
-                    android:textColor="@color/silver"
+                    android:autoSizePresetSizes="@array/autosize_text_sizes"
                     android:autoSizeTextType="uniform"
-                    android:autoSizePresetSizes="@array/autosize_text_sizes"/>
+                    android:text="@string/dobLabel"
+                    android:textColor="@color/silver" />
 
             </LinearLayout>
 
@@ -59,4 +66,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -3,8 +3,6 @@ package com.example.puremetry;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 import java.text.ParseException;
 import java.util.Date;
 

@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,10 +18,9 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.puremetry.databinding.ActivityProfilesListUiBinding;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -33,7 +30,7 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
     private static ArrayList<Profile> profiles;
     private int profileID;
 
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> newProfileResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -56,8 +53,7 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityProfilesListUiBinding binding = ActivityProfilesListUiBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_profiles_list_ui);
 
         // Remove title
         getSupportActionBar().setTitle("");
@@ -70,17 +66,17 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
         // Get profiles list
         profiles = ProfilesListController.retrieveProfiles(this);
 
-        // Create profiles list view
+        // Initializing adapter class and passing our arraylist to it.
         listAdapter = new ListAdapter(this, profiles);
 
-        binding.profilesList.setAdapter(listAdapter);
-        binding.profilesList.setClickable(true);
-        binding.profilesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectProfile(position);
-            }
-        });
+        RecyclerView profilesList = findViewById(R.id.profilesList);
+
+        // Setting a layout manager for recycler view.
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        // Setting layoutmanager and adapter to recycler view.
+        profilesList.setLayoutManager(linearLayoutManager);
+        profilesList.setAdapter(listAdapter);
     }
 
     @Override
@@ -94,7 +90,7 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
 
     public void addProfile() {
         profileID = (profiles.size() > 0) ? profiles.get(profiles.size() - 1).getProfileID() + 1 : 0;
-        ProfilesListController.createProfile(this, profileID, activityResultLauncher);
+        ProfilesListController.createProfile(this, profileID, newProfileResultLauncher);
     }
 
     public void selectProfile(int index) {
@@ -108,32 +104,36 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
         listAdapter.notifyDataSetChanged();
     }
 
-    private class ListAdapter extends ArrayAdapter<Profile> {
+    public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Viewholder> {
 
+        private Context context;
+        private ArrayList<Profile> profiles;
+
+        // Constructor
         public ListAdapter(Context context, ArrayList<Profile> profiles) {
-            super(context, R.layout.profiles_list, profiles);
+            this.context = context;
+            this.profiles = profiles;
         }
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            Profile profile = getItem(position);
+        public ListAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            // to inflate the layout for each item of recycler view.
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.profiles_list, parent, false);
+            return new Viewholder(view);
+        }
 
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.profiles_list, parent, false);
-            }
-
-            ImageView genderIcon = convertView.findViewById(R.id.genderIcon);
-            TextView nameText = convertView.findViewById(R.id.nameText);
-            TextView dobText = convertView.findViewById(R.id.dobText);
-            ImageButton removeButton = convertView.findViewById(R.id.removeButton);
+        @Override
+        public void onBindViewHolder(@NonNull ListAdapter.Viewholder holder, int position) {
+            // to set data to textview and imageview of each card layout
+            Profile profile = profiles.get(position);
 
             int icon = (profile.getGender() == Gender.MALE) ? R.drawable.male : R.drawable.female;
 
-            genderIcon.setImageResource(icon);
-            nameText.setText(profile.getName());
-            dobText.setText(ProfilesListController.DATE_FORMAT.format(profile.getDateOfBirth()));
-            removeButton.setOnClickListener(new View.OnClickListener() {
+            holder.genderIcon.setImageResource(icon);
+            holder.nameText.setText(profile.getName());
+            holder.dobText.setText(ProfilesListController.DATE_FORMAT.format(profile.getDateOfBirth()));
+            holder.removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ProfilesListUI.this);
@@ -154,7 +154,36 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
                             }).show();
                 }
             });
-            return convertView;
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectProfile(position);
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            // this method is used for showing number
+            // of card items in recycler view.
+            return profiles.size();
+        }
+
+        // View holder class for initializing of views
+        public class Viewholder extends RecyclerView.ViewHolder {
+            private ImageView genderIcon;
+            private TextView nameText;
+            private TextView dobText;
+            private ImageButton removeButton;
+
+            public Viewholder(@NonNull View itemView) {
+                super(itemView);
+                genderIcon = itemView.findViewById(R.id.genderIcon);
+                nameText = itemView.findViewById(R.id.nameText);
+                dobText = itemView.findViewById(R.id.dobText);
+                removeButton = itemView.findViewById(R.id.removeButton);
+            }
         }
     }
 
