@@ -41,12 +41,11 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profilesList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/profiles_list"
-        app:layout_constraintTop_toBottomOf="@id/guideline_h_3"/>
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_h_3" />
 
     <ImageButton
         android:id="@+id/createButton"

@@ -2,6 +2,7 @@ package com.example.puremetry;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import androidx.activity.result.ActivityResultLauncher;
 
@@ -29,10 +30,28 @@ public class ProfilesListController {
         launcher.launch(i);
     }
 
-    public static void loadProfile(Context context, ArrayList<Profile> profiles, int index) {
+    public static void loadProfile(Context context, Profile profile) {
         Intent i = new Intent(context, ProfileUI.class);
         i.putExtra("mode", "existing");
-        i.putExtra("profile", profiles.get(index));
+
+        // Storing data into SharedPreferences
+        SharedPreferences sharedPreferences = context.getSharedPreferences("SelectedProfile", context.MODE_PRIVATE);
+
+        // Creating an Editor object to edit(write to the file)
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        // Storing the key and its value as the data fetched from edittext
+        myEdit.putInt("profileID", profile.getProfileID());
+        myEdit.putString("name", profile.getName());
+        myEdit.putString("gender", profile.getGender().name());
+        myEdit.putLong("dateOfBirth", profile.getDateOfBirth().getTime());
+        myEdit.putString("nric", profile.getNric());
+
+        // Once the changes have been made,
+        // we need to commit to apply those changes made,
+        // otherwise, it will throw an error
+        myEdit.commit();
+
         context.startActivity(i);
     }
 

@@ -3,6 +3,7 @@ package com.example.puremetry;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.puremetry.databinding.ActivityProfileUiBinding;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
@@ -88,16 +88,17 @@ public class ProfileUI extends AppCompatActivity implements View.OnClickListener
         Intent i = getIntent();
 
         mode = i.getStringExtra("mode");
-        if (mode.equals("new")) {
-            profileID = i.getIntExtra("profileID", 0);
-        }
-        else if (mode.equals("existing")) {
-            Profile profile = i.getParcelableExtra("profile");
-            profileID = profile.getProfileID();
-            name = profile.getName();
-            gender = profile.getGender();
-            dateOfBirth = profile.getDateOfBirth();
-            nric = profile.getNric();
+        // Mode is null when profile page is returned from history taking page
+        if (mode == null || mode.equals("existing")) {
+            // Fetching the stored data
+            // from the SharedPreference
+            SharedPreferences sh = getSharedPreferences("SelectedProfile", MODE_PRIVATE);
+
+            profileID = sh.getInt("profileID", 0);
+            name = sh.getString("name", "");
+            gender = Gender.valueOf(sh.getString("gender", "MALE"));
+            dateOfBirth = new Date(sh.getLong("dateOfBirth", 0));
+            nric = sh.getString("nric", "");
 
             EditText nameEditText = findViewById(R.id.nameEditText);
             EditText nricEditText = findViewById(R.id.nricEditText);
@@ -117,6 +118,8 @@ public class ProfileUI extends AppCompatActivity implements View.OnClickListener
             femaleButton.setEnabled(false);
             birthEditText.setEnabled(false);
             nricEditText.setEnabled(false);
+        } else {
+            profileID = i.getIntExtra("profileID", 0);
         }
     }
 
@@ -160,13 +163,12 @@ public class ProfileUI extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(ProfileUI.this, "Please fill in all fields.",
                             Toast.LENGTH_SHORT).show();
                 else {
-                    // Create new profile
-                    if (mode.equals("new")) {
+                    if (mode == null || mode.equals("existing"))
+                        startHistoryTaking();
+                    else if (mode.equals("new")) { // Create new profile
                         submitProfile();
                         finish();
                     }
-                    else if (mode.equals("existing"))
-                        startChatBot();
                 }
                 break;
         }
@@ -179,8 +181,8 @@ public class ProfileUI extends AppCompatActivity implements View.OnClickListener
         setResult(Activity.RESULT_OK, i);
     }
 
-    public void startChatBot() {
-        ProfileController.loadChatBot(this);
+    public void startHistoryTaking() {
+        ProfileController.loadHistoryTaking(this);
     }
 
 }
