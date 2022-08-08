@@ -8,4 +8,6 @@
     <string name="doneButton">Done</string>
     <string name="inputLabel">Input</string>
     <string name="submitButton">Submit</string>
+    <string name="nextButton">Next</string>
+    <string name="backButton">Back</string>
 </resources>

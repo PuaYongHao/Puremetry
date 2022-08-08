@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InstructionsUI">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/instructionsViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/indicatorLayout"
+        android:layout_alignParentTop="true">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/indicatorLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:padding="20dp"></LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:text="@string/backButton"
+        android:textColor="@color/blue_start"
+        android:visibility="invisible" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:text="@string/nextButton"
+        android:textColor="@color/blue_start" />
+
+</RelativeLayout>

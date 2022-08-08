@@ -15,6 +15,10 @@
         android:theme="@style/Theme.Puremetry"
         tools:targetApi="31">
         <activity
+            android:name=".NoiseDetectUI"
+            android:exported="false"
+            android:parentActivityName=".InstructionsUI"/>
+        <activity
             android:name=".InstructionsUI"
             android:exported="false"
             android:parentActivityName=".HistoryTakingUI" />

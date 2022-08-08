@@ -2,7 +2,6 @@ package com.example.puremetry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,7 +66,7 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
         profiles = ProfilesListController.retrieveProfiles(this);
 
         // Initializing adapter class and passing our arraylist to it.
-        listAdapter = new ListAdapter(this, profiles);
+        listAdapter = new ListAdapter(profiles);
 
         RecyclerView profilesList = findViewById(R.id.profilesList);
 
@@ -106,12 +105,10 @@ public class ProfilesListUI extends AppCompatActivity implements View.OnClickLis
 
     public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Viewholder> {
 
-        private Context context;
         private ArrayList<Profile> profiles;
 
         // Constructor
-        public ListAdapter(Context context, ArrayList<Profile> profiles) {
-            this.context = context;
+        public ListAdapter(ArrayList<Profile> profiles) {
             this.profiles = profiles;
         }
 
