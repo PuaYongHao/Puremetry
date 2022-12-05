@@ -41,10 +41,10 @@
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:textColor="@color/blue_start"
-        app:layout_constraintBottom_toTopOf="@id/guideline_h_3"
+        app:layout_constraintBottom_toTopOf="@id/guideline_h_7"
         app:layout_constraintEnd_toEndOf="@id/guideline_v_3"
         app:layout_constraintStart_toStartOf="@id/guideline_v_2"
-        app:layout_constraintTop_toBottomOf="@id/guideline_h_2" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_h_6" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/continueButton"
@@ -93,6 +93,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.83" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.39" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.61" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v_1"
