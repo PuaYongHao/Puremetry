@@ -140,6 +140,7 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
                     if (permissionToRecord && permissionToStore) {
                         Toast.makeText(getApplicationContext(), "Audio Permission is granted", Toast.LENGTH_SHORT).show();
                         detectNoiseLevel();
+                        return;
                     }
                 }
                 if ((grantResults.length == 1 &&
