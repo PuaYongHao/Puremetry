@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.puremetry">
 
+    <uses-permission
+        android:name="android.permission.CAPTURE_AUDIO_OUTPUT"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,14 +16,19 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Puremetry"
         tools:targetApi="31">
         <activity
+            android:name=".HearingTestUI"
+            android:exported="false"
+            android:parentActivityName=".NoiseDetectUI" />
+        <activity
             android:name=".NoiseDetectUI"
             android:exported="false"
-            android:parentActivityName=".InstructionsUI"/>
+            android:parentActivityName=".InstructionsUI" />
         <activity
             android:name=".InstructionsUI"
             android:exported="false"

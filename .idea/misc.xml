@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable-v24/grayish_pink_button.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.177" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/blue_circular_progress_bar.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/blue_round_button.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/calendar.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/cardview_click_effect.xml" value="0.177" />
@@ -17,11 +18,13 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/person.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/remove.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/round_button.xml" value="0.2265" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/silence.xml" value="0.1005" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/tes.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/white_round_button.xml" value="0.1245" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/white_round_card.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/drawable/white_round_edittext.xml" value="0.177" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_chat_bot_ui.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_hearing_test_ui.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_history_taking_ui.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_instructions_ui.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Puremetry/app/src/main/res/layout/activity_main.xml" value="0.264" />
