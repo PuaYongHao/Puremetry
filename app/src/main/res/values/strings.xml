@@ -2,6 +2,7 @@
     <string name="app_name">Puremetry</string>
     <string name="startButton">Start</string>
     <string name="resultsButton">Results</string>
+    <string name="calibrationButton">Calibration</string>
     <string name="nameLabel">Name</string>
     <string name="dobLabel">Date Of Birth (dd/MM/yyyy)</string>
     <string name="nricLabel">NRIC/FIN</string>
@@ -11,4 +12,9 @@
     <string name="nextButton">Next</string>
     <string name="backButton">Back</string>
     <string name="continueButton">Continue</string>
+    <string name="responseButton">I heard it</string>
+    <string name="instructionText">Press the button as soon as you hear each beep, even if it is soft.</string>
+    <string name="hearingLossText">This shows your hearing loss level.</string>
+    <string name="frequencyText">Ear Frequency</string>
+    <string name="returnButton">Return</string>
 </resources>

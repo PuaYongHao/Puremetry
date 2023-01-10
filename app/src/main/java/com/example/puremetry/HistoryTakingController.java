@@ -39,6 +39,7 @@ public class HistoryTakingController {
 
     public static void loadInstructions(Context context) {
         Intent i = new Intent(context, InstructionsUI.class);
+        i.putExtra("Action", "Test");
         context.startActivity(i);
     }
 

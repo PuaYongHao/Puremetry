@@ -47,6 +47,20 @@
         app:layout_constraintStart_toStartOf="@id/guideline_v_2"
         app:layout_constraintTop_toBottomOf="@id/guideline_h_5" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/calibrationButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/blue_round_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/calibrationButton"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/guideline_h_8"
+        app:layout_constraintDimensionRatio="1:0.5"
+        app:layout_constraintEnd_toEndOf="@id/guideline_v_3"
+        app:layout_constraintStart_toStartOf="@id/guideline_v_2"
+        app:layout_constraintTop_toBottomOf="@id/guideline_h_7" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v_1"
         android:layout_width="wrap_content"
@@ -116,5 +130,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.77" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.87" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

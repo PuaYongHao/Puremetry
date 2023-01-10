@@ -3,6 +3,7 @@ package com.example.puremetry;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -32,6 +33,8 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
     public static double REFERENCE = 0.00002;
     public static final int APP_PERMISSION_RECORD_AUDIO = 1;
 
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,8 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
 
         noiseLevelProgressBar.setProgress(noiseLevel);
 
+        intent = getIntent();
+
         detectNoiseLevel();
     }
 
@@ -67,7 +72,10 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continueButton:
-                NoiseDetectController.loadHearingTest(this);
+                if (intent.getStringExtra("Action").equals("Calibration"))
+                    NoiseDetectController.loadCalHearingTest(this);
+                else
+                    NoiseDetectController.loadHearingTest(this);
                 break;
         }
     }

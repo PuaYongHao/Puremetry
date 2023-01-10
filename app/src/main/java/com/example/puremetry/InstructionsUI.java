@@ -1,5 +1,6 @@
 package com.example.puremetry;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ public class InstructionsUI extends AppCompatActivity implements View.OnClickLis
     private Button nextButton;
     private Button backButton;
     private int currentPage;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class InstructionsUI extends AppCompatActivity implements View.OnClickLis
         displayDotsIndicator(0);
 
         instructionsViewPager.addOnPageChangeListener(viewListener);
+
+        intent = getIntent();
     }
 
     @Override
@@ -59,8 +63,12 @@ public class InstructionsUI extends AppCompatActivity implements View.OnClickLis
             case R.id.nextButton:
                 if (nextButton.getText().toString().equals("Next"))
                     instructionsViewPager.setCurrentItem(currentPage + 1);
-                else
-                    InstructionsController.loadNoiseDetect(this);
+                else {
+                    if (intent.getStringExtra("Action").equals("Calibration"))
+                        InstructionsController.loadCalNoiseDetect(this);
+                    else
+                        InstructionsController.loadNoiseDetect(this);
+                }
                 break;
             case R.id.backButton:
                 instructionsViewPager.setCurrentItem(currentPage - 1);
