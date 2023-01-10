@@ -131,7 +131,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -181,7 +181,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/birthEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -205,7 +205,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nricEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
