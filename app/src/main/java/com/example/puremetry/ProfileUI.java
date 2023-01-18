@@ -90,8 +90,7 @@ public class ProfileUI extends AppCompatActivity implements View.OnClickListener
         mode = i.getStringExtra("mode");
         // Mode is null when profile page is returned from history taking page
         if (mode == null || mode.equals("existing")) {
-            // Fetching the stored data
-            // from the SharedPreference
+            // Fetching the stored data from the SharedPreference
             SharedPreferences sh = getSharedPreferences("SelectedProfile", MODE_PRIVATE);
 
             profileID = sh.getInt("profileID", 0);

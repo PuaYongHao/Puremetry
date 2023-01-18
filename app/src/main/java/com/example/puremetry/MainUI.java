@@ -19,9 +19,19 @@ public class MainUI extends AppCompatActivity implements View.OnClickListener {
         // Set OnClickListener for button
         Button startButton = findViewById(R.id.startButton);
         Button resultsButton = findViewById(R.id.resultsButton);
+        Button calibrationButton = findViewById(R.id.calibrationButton);
 
         startButton.setOnClickListener(this);
         resultsButton.setOnClickListener(this);
+        calibrationButton.setOnClickListener(this);
+
+        if (!HearingTestController.isCalibrated(this)) {
+            startButton.setEnabled(false);
+            resultsButton.setEnabled(false);
+        } else {
+            startButton.setEnabled(true);
+            resultsButton.setEnabled(true);
+        }
     }
 
     @Override
@@ -33,6 +43,9 @@ public class MainUI extends AppCompatActivity implements View.OnClickListener {
             case R.id.resultsButton:
                 selectResults();
                 break;
+            case R.id.calibrationButton:
+                selectCalibration();
+                break;
         }
     }
 
@@ -42,6 +55,10 @@ public class MainUI extends AppCompatActivity implements View.OnClickListener {
 
     public void selectResults() {
         MainController.loadReportsList(this);
+    }
+
+    public void selectCalibration() {
+        MainController.loadInstructions(this);
     }
 
 }

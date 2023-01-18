@@ -13,4 +13,6 @@
     <color name="light_grayish_pink">#F6D2E0</color>
     <color name="clicked_light_grayish_blue">#87CBE9</color>
     <color name="clicked_light_grayish_pink">#E992B4</color>
+    <color name="red">#D0312D</color>
+    <color name="blue">#3944BC</color>
 </resources>

@@ -24,19 +24,26 @@ public class NoiseDetectController extends Activity {
 
     public static void loadHearingTest(Context context) {
         Intent i = new Intent(context, HearingTestUI.class);
+        i.putExtra("Action","Test");
+        context.startActivity(i);
+    }
+
+    public static void loadCalHearingTest(Context context) {
+        Intent i = new Intent(context, HearingTestUI.class);
+        i.putExtra("Action","Calibration");
         context.startActivity(i);
     }
 
     public static Boolean validateNoiseLevel(int noiseLevel) {
-        if (noiseLevel <= 20)
+        if (noiseLevel <= 40)
             return true;
         return false;
     }
 
     public static String updateDescription(int noiseLevel) {
-        if (noiseLevel >= 80)
+        if (noiseLevel >= 70)
             return noise_description[0];
-        else if (noiseLevel <= 20)
+        else if (noiseLevel <= 40)
             return noise_description[2];
         else
             return noise_description[1];

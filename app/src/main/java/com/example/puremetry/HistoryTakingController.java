@@ -2,6 +2,11 @@ package com.example.puremetry;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class HistoryTakingController {
 
@@ -37,8 +42,28 @@ public class HistoryTakingController {
         return response;
     }
 
-    public static void loadInstructions(Context context) {
+    public static void loadInstructions(Context context, ArrayList<Response> responses) {
         Intent i = new Intent(context, InstructionsUI.class);
+        i.putExtra("Action", "Test");
+
+        // Storing data into SharedPreferences
+        SharedPreferences sharedPreferences = context.getSharedPreferences("ClinicalHistory", context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(responses);
+
+        // Creating an Editor object to edit(write to the file)
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        // Storing the key and its value as the data
+        myEdit.remove("responses").commit();
+        myEdit.putString("responses", json);
+
+        // Once the changes have been made,
+        // we need to commit to apply those changes made,
+        // otherwise, it will throw an error
+        myEdit.commit();
+
         context.startActivity(i);
     }
 

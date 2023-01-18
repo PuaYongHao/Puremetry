@@ -22,39 +22,51 @@
         android:theme="@style/Theme.Puremetry"
         tools:targetApi="31">
         <activity
+            android:name=".ResultUI"
+            android:exported="false"
+            android:parentActivityName=".MainUI"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".HearingTestUI"
             android:exported="false"
-            android:parentActivityName=".NoiseDetectUI" />
+            android:parentActivityName=".MainUI"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".NoiseDetectUI"
             android:exported="false"
-            android:parentActivityName=".InstructionsUI" />
+            android:parentActivityName=".MainUI"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".InstructionsUI"
             android:exported="false"
-            android:parentActivityName=".HistoryTakingUI" />
+            android:parentActivityName=".HistoryTakingUI"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".HistoryTakingUI"
             android:exported="false"
-            android:parentActivityName=".ProfileUI" />
+            android:parentActivityName=".ProfileUI"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".ProfileUI"
             android:exported="false"
-            android:parentActivityName=".ProfilesListUI" />
+            android:parentActivityName=".ProfilesListUI"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".ReportsListUI"
             android:exported="false"
-            android:parentActivityName=".MainUI" />
+            android:parentActivityName=".MainUI"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".ProfilesListUI"
             android:exported="false"
-            android:parentActivityName=".MainUI" />
+            android:parentActivityName=".MainUI"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".MainUI"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
