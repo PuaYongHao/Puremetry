@@ -97,7 +97,7 @@ public class HistoryTakingUI extends AppCompatActivity implements View.OnClickLi
         responses.add(response);
         if (HistoryTakingController.isLastQuestion(currentQuestionIndex)) {
             if (HistoryTakingController.checkUserWellness(selectedOption))
-                HistoryTakingController.loadInstructions(this);
+                HistoryTakingController.loadInstructions(this, responses);
             else {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Get Well Soon")

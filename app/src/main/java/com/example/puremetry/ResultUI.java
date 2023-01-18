@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 public class ResultUI extends AppCompatActivity implements View.OnClickListener {
 
     private LineChart audiogramLineChart;
+    private TextView hearingLossTextView;
+    private TextView recommendationTextView;
     private double[][] testResults;
     private double[] calibrationArray;
 
@@ -41,6 +44,8 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
         returnButton.setOnClickListener(this);
 
         audiogramLineChart = findViewById(R.id.audiogramLineChart);
+        hearingLossTextView = findViewById(R.id.hearingLossTextView);
+        recommendationTextView = findViewById(R.id.recommendationTextView);
 
         Intent i = getIntent();
         String result = i.getStringExtra("report");
@@ -48,23 +53,36 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
         testResults = ResultController.readTestData(result, this);
         calibrationArray = ResultController.readCalibration(this);
 
+        String mode = i.getStringExtra("Action");
+        String recommendation = "";
+        // Select result from ReportList
+        if (mode.equals("Existing")) {
+            recommendation = ResultController.getRecommendation(this, result);
+        }
+        // Showing result after hearing test
+        else {
+            recommendation = ResultController.compileRecommendation(this);
+            ResultController.storeRecommendation(this, result, recommendation);
+        }
+
         displayLineChart();
+        recommendationTextView.setText(recommendation);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.returnButton:
-                ResultController.loadMain(this);
+                ResultController.loadReportsList(this);
                 break;
         }
     }
 
-    public float scaleCbr(double cbr) {
+    public float convertFrequencyToLabel(double cbr) {
         return (float) (Math.log10(cbr / 250) / Math.log10(2));
     }
 
-    public float unScaleCbr(double cbr) {
+    public float convertLabelToFrequency(double cbr) {
         double calcVal = Math.pow(2, cbr) * 250;
         return (float) roundToMultipleOf(calcVal, 250);
     }
@@ -81,27 +99,50 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
         audiogramLineChart.setDescription(description);
 
         // Right Threshold
-        ArrayList<Entry> rightEarThreshold = new ArrayList<Entry>();
+        ArrayList<Entry> rightEarDataPoint = new ArrayList<Entry>();
+        ArrayList<Integer> rightEarThreshold = new ArrayList<Integer>();
         for (int i = 0; i < testResults[0].length; i++) {
-            Entry dataPoint = new Entry(scaleCbr(HearingTestUI.frequencies[i]), roundToMultipleOf(testResults[0][i] - calibrationArray[i], 5));
-            rightEarThreshold.add(dataPoint);
+            int threshold = roundToMultipleOf(testResults[0][i] - calibrationArray[i], 5);
+            Entry dataPoint = new Entry(convertFrequencyToLabel(HearingTestUI.frequencies[i]), threshold);
+            rightEarThreshold.add(threshold);
+            rightEarDataPoint.add(dataPoint);
         }
-        LineDataSet rightDataSet = new LineDataSet(rightEarThreshold, "Right");
+        LineDataSet rightDataSet = new LineDataSet(rightEarDataPoint, "Right");
         rightDataSet.setDrawValues(false);
         rightDataSet.setCircleColor(Color.RED);
         rightDataSet.setColor(Color.RED);
 
+        // Find hearing loss level for right ear
+        int[] values;
+        values = ResultController.findHearingLossRange(rightEarThreshold);
+        int rightMin = values[0];
+        int rightMax = values[1];
+        String rightHearingLevel = ResultController.defineHearingLossForEachEar(rightMin, rightMax);
+
         // Left threshold
-        ArrayList<Entry> leftEarThreshold = new ArrayList<Entry>();
+        ArrayList<Entry> leftEarDataPoint = new ArrayList<Entry>();
+        ArrayList<Integer> leftEarThreshold = new ArrayList<Integer>();
         for (int i = 0; i < testResults[1].length; i++) {
-            Entry dataPoint = new Entry(scaleCbr(HearingTestUI.frequencies[i]), roundToMultipleOf(testResults[1][i] - calibrationArray[i], 5));
-            leftEarThreshold.add(dataPoint);
+            int threshold = roundToMultipleOf(testResults[1][i] - calibrationArray[i], 5);
+            Entry dataPoint = new Entry(convertFrequencyToLabel(HearingTestUI.frequencies[i]), threshold);
+            leftEarThreshold.add(threshold);
+            leftEarDataPoint.add(dataPoint);
         }
-        LineDataSet leftDataSet = new LineDataSet(leftEarThreshold, "Left");
+        LineDataSet leftDataSet = new LineDataSet(leftEarDataPoint, "Left");
         leftDataSet.setDrawValues(false);
         leftDataSet.setCircleColor(Color.BLUE);
         leftDataSet.setColor(Color.BLUE);
         leftDataSet.setDrawCircleHole(false);
+
+        // Find hearing loss level for left ear
+        values = ResultController.findHearingLossRange(leftEarThreshold);
+        int leftMin = values[0];
+        int leftMax = values[1];
+        String leftHearingLevel = ResultController.defineHearingLossForEachEar(leftMin, leftMax);
+
+        // Update hearingLossTextView accordingly
+        String hearingLossText = ResultController.defineHearingLossForBoth(rightHearingLevel, leftHearingLevel);
+        hearingLossTextView.setText(hearingLossText);
 
         // X Axis
         XAxis xAxis = audiogramLineChart.getXAxis();
@@ -113,7 +154,7 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
             public String getFormattedValue(float value) {
                 DecimalFormat mFormat;
                 mFormat = new DecimalFormat("##0.#"); // use one decimal.
-                return mFormat.format(unScaleCbr(value));
+                return mFormat.format(convertLabelToFrequency(value));
             }
         });
 

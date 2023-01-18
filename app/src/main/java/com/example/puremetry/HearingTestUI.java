@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,18 +21,16 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
     private final int sampleRate = 44100;
     private final int numSamples = duration * sampleRate;
     private final int volume = 32767;
-    //static public final int[] calFrequencies = {250, 500, 750, 1000, 1500, 2000, 3000, 4000, 6000, 8000};
-    //static public final int[] frequencies = {250, 500, 1000, 2000, 4000, 8000};
-    static public final int[] calFrequencies = {250, 500, 1000, 2000, 4000, 8000};
-    static public final int[] frequencies = {250, 500, 1000, 2000, 4000, 8000};
+    //    static public final int[] calFrequencies = {250, 500, 1000, 2000, 4000, 8000};
+//    static public final int[] frequencies = {250, 500, 1000, 2000, 4000, 8000};
+    static public final int[] calFrequencies = {250};
+    static public final int[] frequencies = {250};
     public double[] thresholds_right;
     public double[] thresholds_left;
-    static public final int defaultGain = 9;
-    static public int gain = defaultGain;
+    static public int gain = 9;
     private boolean heard = false;
     testThread testThread;
     Intent intent;
-    String fileName;
 
     private TextView frequencyTextView;
 
@@ -97,8 +96,17 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onStop() {
-        super.onStop();
         testThread.stopThread();
+        super.onStop();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN
+                || keyCode == KeyEvent.KEYCODE_VOLUME_UP)
+            return true;
+        else
+            return false;
     }
 
     public class testThread extends Thread {
@@ -141,7 +149,7 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
         }
 
         public void obtainThreshold(int s, int i) {
-            double threshold = singleTest(s, i);
+            double threshold = hearingTest(s, i);
             //records volume as threshold
             if (s == 0) {
                 thresholds_right[i] = threshold;
@@ -150,7 +158,7 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        public double singleTest(int s, int i) {
+        public double hearingTest(int s, int i) {
             AudioTrack audioTrack;
 
             int frequency;

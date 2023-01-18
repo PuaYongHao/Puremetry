@@ -18,7 +18,7 @@ public class ReportsListController {
         Collections.sort(reports, Collections.reverseOrder());
         for (Iterator<String> iterator = reports.iterator(); iterator.hasNext(); ) {
             String string = iterator.next();
-            Pattern pattern = Pattern.compile("[A-Za-z0-9]+-\\d+");
+            Pattern pattern = Pattern.compile("^[A-Za-z0-9]+-\\d+");
             Matcher matcher = pattern.matcher(string);
             if (!matcher.find())
                 iterator.remove();
@@ -31,11 +31,14 @@ public class ReportsListController {
         reports.remove(index);
         File file = new File(context.getFilesDir() + "/" + fileName);
         file.delete();
+        File recommendationFile = new File(context.getFilesDir() + "/Recommendation-" + fileName);
+        recommendationFile.delete();
     }
 
     public static void loadResult(Context context, String report) {
         Intent i = new Intent(context, ResultUI.class);
         i.putExtra("report", report);
+        i.putExtra("Action", "Existing");
         context.startActivity(i);
     }
 

@@ -62,7 +62,7 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
     final Runnable updater = new Runnable() {
         @Override
         public void run() {
-            handler.postDelayed(this, 500);
+            handler.postDelayed(this, 1000);
             if (recorder != null)
                 detectNoiseLevel();
         }

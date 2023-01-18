@@ -131,6 +131,7 @@ public class HearingTestController {
     public static void loadResult(Context context) {
         Intent i = new Intent(context, ResultUI.class);
         i.putExtra("report", fileName);
+        i.putExtra("Action", "New");
         context.startActivity(i);
     }
 

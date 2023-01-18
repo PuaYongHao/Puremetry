@@ -15,6 +15,7 @@
     <string name="responseButton">I heard it</string>
     <string name="instructionText">Press the button as soon as you hear each beep, even if it is soft.</string>
     <string name="hearingLossText">This shows your hearing loss level.</string>
+    <string name="recommendationText">This shows your recommendation.</string>
     <string name="frequencyText">Ear Frequency</string>
     <string name="returnButton">Return</string>
 </resources>
