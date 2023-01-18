@@ -21,10 +21,8 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
     private final int sampleRate = 44100;
     private final int numSamples = duration * sampleRate;
     private final int volume = 32767;
-    //    static public final int[] calFrequencies = {250, 500, 1000, 2000, 4000, 8000};
-//    static public final int[] frequencies = {250, 500, 1000, 2000, 4000, 8000};
-    static public final int[] calFrequencies = {250};
-    static public final int[] frequencies = {250};
+    static public final int[] calFrequencies = {250, 500, 1000, 2000, 4000, 8000};
+    static public final int[] frequencies = {250, 500, 1000, 2000, 4000, 8000};
     public double[] thresholds_right;
     public double[] thresholds_left;
     static public int gain = 9;
