@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReportsListUI">
+    tools:context=".ResultsListUI">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reportsList"
+        android:id="@+id/resultsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@id/guideline_h_1" />

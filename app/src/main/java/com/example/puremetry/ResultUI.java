@@ -73,17 +73,17 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.returnButton:
-                ResultController.loadReportsList(this);
+                ResultController.loadResultsList(this);
                 break;
         }
     }
 
-    public float convertFrequencyToLabel(double cbr) {
-        return (float) (Math.log10(cbr / 250) / Math.log10(2));
+    private float convertFrequencyToLabel(double fre) {
+        return (float) (Math.log10(fre / 250) / Math.log10(2));
     }
 
-    public float convertLabelToFrequency(double cbr) {
-        double calcVal = Math.pow(2, cbr) * 250;
+    private float convertLabelToFrequency(double label) {
+        double calcVal = Math.pow(2, label) * 250;
         return (float) roundToMultipleOf(calcVal, 250);
     }
 
@@ -103,7 +103,7 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
         ArrayList<Integer> rightEarThreshold = new ArrayList<Integer>();
         for (int i = 0; i < testResults[0].length; i++) {
             int threshold = roundToMultipleOf(testResults[0][i] - calibrationArray[i], 5);
-            Entry dataPoint = new Entry(convertFrequencyToLabel(HearingTestUI.frequencies[i]), threshold);
+            Entry dataPoint = new Entry(convertFrequencyToLabel(HearingTestUI.FREQUENCIES[i]), threshold);
             rightEarThreshold.add(threshold);
             rightEarDataPoint.add(dataPoint);
         }
@@ -124,7 +124,7 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
         ArrayList<Integer> leftEarThreshold = new ArrayList<Integer>();
         for (int i = 0; i < testResults[1].length; i++) {
             int threshold = roundToMultipleOf(testResults[1][i] - calibrationArray[i], 5);
-            Entry dataPoint = new Entry(convertFrequencyToLabel(HearingTestUI.frequencies[i]), threshold);
+            Entry dataPoint = new Entry(convertFrequencyToLabel(HearingTestUI.FREQUENCIES[i]), threshold);
             leftEarThreshold.add(threshold);
             leftEarDataPoint.add(dataPoint);
         }

@@ -59,7 +59,7 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
         detectNoiseLevel();
     }
 
-    final Runnable updater = new Runnable() {
+    final Runnable UPDATER = new Runnable() {
         @Override
         public void run() {
             handler.postDelayed(this, 1000);
@@ -129,13 +129,13 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        handler.post(updater);
+        handler.post(UPDATER);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(updater);
+        handler.removeCallbacks(UPDATER);
     }
 
     @Override

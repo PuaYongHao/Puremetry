@@ -17,18 +17,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HearingTestUI extends AppCompatActivity implements View.OnClickListener {
-    private final int duration = 1;
-    private final int sampleRate = 44100;
-    private final int numSamples = duration * sampleRate;
-    private final int volume = 32767;
-    static public final int[] calFrequencies = {250, 500, 1000, 2000, 4000, 8000};
-    static public final int[] frequencies = {250, 500, 1000, 2000, 4000, 8000};
+    private final int DURATION = 1;
+    private final int SAMPLE_RATE = 44100;
+    private final int NUM_SAMPLES = DURATION * SAMPLE_RATE;
+    private final int VOLUME = 32767;
+    public static final int[] CAL_FREQUENCIES = {250, 500, 1000, 2000, 4000, 8000};
+    public static final int[] FREQUENCIES = {250, 500, 1000, 2000, 4000, 8000};
     public double[] thresholds_right;
     public double[] thresholds_left;
-    static public int gain = 9;
+    public static int gain = 9;
     private boolean heard = false;
-    testThread testThread;
-    Intent intent;
+    private testThread testThread;
+    private Intent intent;
 
     private TextView frequencyTextView;
 
@@ -49,11 +49,11 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
         intent = getIntent();
 
         if (intent.getStringExtra("Action").equals("Calibration")) {
-            thresholds_right = new double[calFrequencies.length];
-            thresholds_left = new double[calFrequencies.length];
+            thresholds_right = new double[CAL_FREQUENCIES.length];
+            thresholds_left = new double[CAL_FREQUENCIES.length];
         } else {
-            thresholds_right = new double[frequencies.length];
-            thresholds_left = new double[frequencies.length];
+            thresholds_right = new double[FREQUENCIES.length];
+            thresholds_left = new double[FREQUENCIES.length];
         }
 
     }
@@ -121,12 +121,12 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
 
                 if (intent.getStringExtra("Action").equals("Calibration")) {
                     // iterated once for every frequency to be calibrated
-                    for (int i = 0; i < calFrequencies.length; i++) {
+                    for (int i = 0; i < CAL_FREQUENCIES.length; i++) {
                         obtainThreshold(s, i);
                     }
                 } else {
                     // iterated once for every frequency to be tested
-                    for (int i = 0; i < frequencies.length; i++) {
+                    for (int i = 0; i < FREQUENCIES.length; i++) {
                         obtainThreshold(s, i);
                     }
                 }
@@ -134,8 +134,8 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
             if (stopped) return;
 
             if (!intent.getStringExtra("Action").equals("Test")) {  // store calibration
-                double[] calibrationArray = new double[calFrequencies.length];
-                for (int i = 0; i < calFrequencies.length; i++) {  // average left/right channels
+                double[] calibrationArray = new double[CAL_FREQUENCIES.length];
+                for (int i = 0; i < CAL_FREQUENCIES.length; i++) {  // average left/right channels
                     calibrationArray[i] = (thresholds_left[i] + thresholds_right[i]) / 2;
                 }
                 HearingTestController.writeCalibration(calibrationArray, HearingTestUI.this);
@@ -146,33 +146,33 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        public void obtainThreshold(int s, int i) {
-            double threshold = hearingTest(s, i);
+        private void obtainThreshold(int ear, int frequencyIndex) {
+            double threshold = hearingTest(ear, frequencyIndex);
             //records volume as threshold
-            if (s == 0) {
-                thresholds_right[i] = threshold;
+            if (ear == 0) {
+                thresholds_right[frequencyIndex] = threshold;
             } else {
-                thresholds_left[i] = threshold;
+                thresholds_left[frequencyIndex] = threshold;
             }
         }
 
-        public double hearingTest(int s, int i) {
+        private double hearingTest(int ear, int frequencyIndex) {
             AudioTrack audioTrack;
 
             int frequency;
             if (intent.getStringExtra("Action").equals("Calibration"))
-                frequency = calFrequencies[i];
+                frequency = CAL_FREQUENCIES[frequencyIndex];
             else
-                frequency = frequencies[i];
+                frequency = FREQUENCIES[frequencyIndex];
 
-            if (s == 0)
+            if (ear == 0)
                 frequencyTextView.setText("Right " + frequency);
             else
                 frequencyTextView.setText("Left " + frequency);
 
-            float increment = (float) (2 * Math.PI) * frequency / sampleRate;
+            float increment = (float) (2 * Math.PI) * frequency / SAMPLE_RATE;
             int actualVolume;
-            int maxVolume = volume;
+            int maxVolume = VOLUME;
             int minVolume = 0;
             int thresVolume = maxVolume;
             while (!stopped) {
@@ -200,7 +200,7 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
                         if (stopped) break;
 
                         heard = false;
-                        audioTrack = HearingTestController.playSound(HearingTestController.generateTone(increment, actualVolume, numSamples), s, sampleRate);
+                        audioTrack = HearingTestController.playSound(HearingTestController.generateTone(increment, actualVolume, NUM_SAMPLES), ear, SAMPLE_RATE);
                         try {
                             Thread.sleep(HearingTestController.randomTime());
                         } catch (InterruptedException e) {

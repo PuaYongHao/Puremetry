@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DateFormat;
 import java.util.ArrayList;
 
-public class ReportsListUI extends AppCompatActivity {
+public class ResultsListUI extends AppCompatActivity {
 
     private ListAdapter listAdapter;
     private static ArrayList<String> reports;
@@ -26,35 +26,35 @@ public class ReportsListUI extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reports_list_ui);
+        setContentView(R.layout.activity_results_list_ui);
 
         // Remove title
         getSupportActionBar().setTitle("");
 
         // Get report list
-        reports = ReportsListController.retrieveReports(this);
+        reports = ResultsListController.retrieveResults(this);
 
         // Initializing adapter class and passing our arraylist to it.
         listAdapter = new ListAdapter(reports);
 
-        RecyclerView reportsList = findViewById(R.id.reportsList);
+        RecyclerView resultsList = findViewById(R.id.resultsList);
 
         // Setting a layout manager for recycler view.
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         // Setting layoutmanager and adapter to recycler view.
-        reportsList.setLayoutManager(linearLayoutManager);
-        reportsList.setAdapter(listAdapter);
+        resultsList.setLayoutManager(linearLayoutManager);
+        resultsList.setAdapter(listAdapter);
     }
 
-    public void deleteReport(int index) {
-        ReportsListController.removeReport(this, reports, index);
+    public void deleteResult(int index) {
+        ResultsListController.removeResult(this, reports, index);
         listAdapter.notifyDataSetChanged();
     }
 
-    public void selectReport(int index) {
+    public void selectResult(int index) {
         String report = reports.get(index);
-        ReportsListController.loadResult(this, report);
+        ResultsListController.loadResult(this, report);
     }
 
     public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Viewholder> {
@@ -90,15 +90,15 @@ public class ReportsListUI extends AppCompatActivity {
             holder.removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ReportsListUI.this);
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ResultsListUI.this);
 
                     alertDialogBuilder.setTitle("Are you sure you want to delete?")
-                            .setMessage("This report will be deleted immediately. You can't undo this action.")
+                            .setMessage("This result will be deleted immediately. You can't undo this action.")
                             .setCancelable(false)
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    deleteReport(position);
+                                    deleteResult(position);
                                 }
                             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                 @Override
@@ -111,7 +111,7 @@ public class ReportsListUI extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectReport(position);
+                    selectResult(position);
                 }
             });
         }

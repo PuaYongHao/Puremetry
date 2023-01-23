@@ -11,9 +11,9 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ReportsListController {
+public class ResultsListController {
 
-    public static ArrayList<String> retrieveReports(Context context) {
+    public static ArrayList<String> retrieveResults(Context context) {
         ArrayList<String> reports = new ArrayList<String>(Arrays.asList(context.fileList()));
         Collections.sort(reports, Collections.reverseOrder());
         for (Iterator<String> iterator = reports.iterator(); iterator.hasNext(); ) {
@@ -26,7 +26,7 @@ public class ReportsListController {
         return reports;
     }
 
-    public static void removeReport(Context context, ArrayList<String> reports, int index) {
+    public static void removeResult(Context context, ArrayList<String> reports, int index) {
         String fileName = reports.get(index);
         reports.remove(index);
         File file = new File(context.getFilesDir() + "/" + fileName);

@@ -25,13 +25,13 @@ public class ResultController {
     private static String sinceWhen = "";
     private static String twoSymptoms = "F";
 
-    public static void loadReportsList(Context context) {
-        Intent i = new Intent(context, ReportsListUI.class);
+    public static void loadResultsList(Context context) {
+        Intent i = new Intent(context, ResultsListUI.class);
         context.startActivity(i);
     }
 
     public static double[] readCalibration(Context context) {
-        double[] calibrationArray = new double[HearingTestUI.calFrequencies.length];
+        double[] calibrationArray = new double[HearingTestUI.CAL_FREQUENCIES.length];
         byte[] calibrationByteData = new byte[calibrationArray.length * 8];
         try {
             FileInputStream fis = context.openFileInput("Calibration");
@@ -54,7 +54,7 @@ public class ResultController {
     }
 
     public static double[][] readTestData(String fileName, Context context) {
-        byte[] resultByteData = new byte[HearingTestUI.frequencies.length * 8 + HearingTestUI.frequencies.length * 8];
+        byte[] resultByteData = new byte[HearingTestUI.FREQUENCIES.length * 8 + HearingTestUI.FREQUENCIES.length * 8];
         try {
             FileInputStream fis = context.openFileInput(fileName);
             fis.read(resultByteData, 0, resultByteData.length);
@@ -63,10 +63,10 @@ public class ResultController {
         }
 
         // 0 for right, 1 for left
-        double[][] testResults = new double[2][HearingTestUI.frequencies.length];
+        double[][] testResults = new double[2][HearingTestUI.FREQUENCIES.length];
 
         int counter = 0;
-        for (int i = 0; i < HearingTestUI.frequencies.length; i++) {
+        for (int i = 0; i < HearingTestUI.FREQUENCIES.length; i++) {
             byte[] tmpByteBuffer = new byte[8];
             for (int j = 0; j < 8; j++) {
                 tmpByteBuffer[j] = resultByteData[counter];
@@ -76,7 +76,7 @@ public class ResultController {
             testResults[0][i] = ByteBuffer.wrap(tmpByteBuffer).getDouble();
         }
 
-        for (int i = 0; i < HearingTestUI.frequencies.length; i++) {
+        for (int i = 0; i < HearingTestUI.FREQUENCIES.length; i++) {
             byte[] tmpByteBuffer = new byte[8];
             for (int j = 0; j < 8; j++) {
                 tmpByteBuffer[j] = resultByteData[counter];

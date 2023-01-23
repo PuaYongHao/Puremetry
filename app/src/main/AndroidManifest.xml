@@ -52,7 +52,7 @@
             android:parentActivityName=".ProfilesListUI"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".ReportsListUI"
+            android:name=".ResultsListUI"
             android:exported="false"
             android:parentActivityName=".MainUI"
             android:screenOrientation="nosensor" />

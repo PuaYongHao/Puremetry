@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class ProfilesListController {
 
-    private final static String FILENAME = "ProfilesData.csv";
+    private static final String FILENAME = "ProfilesData.csv";
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void createProfile(Context context, int profileID, ActivityResultLauncher<Intent> launcher) {
@@ -63,7 +63,7 @@ public class ProfilesListController {
         return readProfilesData(context);
     }
 
-    public static ArrayList<Profile> readProfilesData(Context context) {
+    private static ArrayList<Profile> readProfilesData(Context context) {
         ArrayList<Profile> profiles = new ArrayList<Profile>();
         try {
             File file = new File(context.getFilesDir(), FILENAME);

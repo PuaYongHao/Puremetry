@@ -3,10 +3,6 @@ package com.example.puremetry;
 import android.content.Context;
 import android.content.Intent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class MainController {
 
     public static void loadProfilesList(Context context) {
@@ -14,8 +10,8 @@ public class MainController {
         context.startActivity(i);
     }
 
-    public static void loadReportsList(Context context) {
-        Intent i = new Intent(context, ReportsListUI.class);
+    public static void loadResultsList(Context context) {
+        Intent i = new Intent(context, ResultsListUI.class);
         context.startActivity(i);
     }
 

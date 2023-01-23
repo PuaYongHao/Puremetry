@@ -54,7 +54,7 @@ public class MainUI extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void selectResults() {
-        MainController.loadReportsList(this);
+        MainController.loadResultsList(this);
     }
 
     public void selectCalibration() {
