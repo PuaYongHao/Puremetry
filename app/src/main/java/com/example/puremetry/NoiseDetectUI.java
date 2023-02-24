@@ -87,6 +87,7 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
         noiseDetectTextView.setText(noise_description);
     }
 
+    // Calculated from the average of all amplitudes in 4 seconds
     public void detectNoiseLevel() {
         if (NoiseDetectController.checkPermission(this)) {
             int bufferSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_DEFAULT, AudioFormat.ENCODING_PCM_16BIT);
@@ -110,9 +111,9 @@ public class NoiseDetectUI extends AppCompatActivity implements View.OnClickList
             double x = average / bufferSize;
             recorder.release();
             double db;
-            // calculating the pascal pressure based on the idea that the max amplitude (between 0 and 32767) is
-            // relative to the pressure
-            double pressure = x / 51805.5336; // the value 51805.5336 can be derived from assuming that x=32767=0.6325 Pa and x=1=0.00002 Pa (the reference value)
+            // Assume 90 dB is the maximum and max amplitude (between 0 and 32767) is relative to
+            // the pressure and thus x=32767=0.6325 Pa and x=1=0.00002 Pa (the reference value)
+            double pressure = x / 51805.5336;
             db = (20 * Math.log10(pressure / REFERENCE));
             if (db > 0) {
                 noiseLevel = (int) db;

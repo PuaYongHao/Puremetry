@@ -112,7 +112,9 @@ public class HearingTestController {
 
     // Writes the parameter byte array to an AudioTrack and plays the array
     public static AudioTrack playSound(float[] generatedSnd, int ear, int sampleRate) {
-        AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_FLOAT, generatedSnd.length, AudioTrack.MODE_STATIC);
+        AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate,
+                AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_FLOAT, generatedSnd.length,
+                AudioTrack.MODE_STATIC);
         audioTrack.write(generatedSnd, 0, generatedSnd.length, AudioTrack.WRITE_BLOCKING);
         if (ear == 0) {
             audioTrack.setStereoVolume(0, AudioTrack.getMaxVolume());
