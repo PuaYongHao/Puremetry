@@ -18,7 +18,7 @@ public class ResultsListController {
         Collections.sort(reports, Collections.reverseOrder());
         for (Iterator<String> iterator = reports.iterator(); iterator.hasNext(); ) {
             String string = iterator.next();
-            Pattern pattern = Pattern.compile("^[A-Za-z0-9]+-\\d+");
+            Pattern pattern = Pattern.compile("^[A-Za-z0-9 ]+-\\d+");
             Matcher matcher = pattern.matcher(string);
             if (!matcher.find())
                 iterator.remove();

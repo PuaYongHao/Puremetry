@@ -160,14 +160,14 @@ public class ResultUI extends AppCompatActivity implements View.OnClickListener 
 
         // Y Axis
         YAxis leftAxis = audiogramLineChart.getAxisLeft();
-        leftAxis.setAxisMinimum(-10);
+        leftAxis.setAxisMinimum(-20);
         leftAxis.setAxisMaximum(120);
         leftAxis.setTextSize(15);
         leftAxis.setInverted(true);
         leftAxis.setTextColor(Color.BLACK);
 
         YAxis rightAxis = audiogramLineChart.getAxisRight();
-        rightAxis.setAxisMinimum(-10);
+        rightAxis.setAxisMinimum(-20);
         rightAxis.setAxisMaximum(120);
         rightAxis.setInverted(true);
         rightAxis.setTextSize(15);
