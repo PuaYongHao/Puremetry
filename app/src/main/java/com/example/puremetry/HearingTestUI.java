@@ -173,18 +173,17 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
             float increment = (float) (2 * Math.PI) * frequency / SAMPLE_RATE;
             int actualVolume;
             int maxVolume = VOLUME;
-            int minVolume = 0;
-            int thresVolume = maxVolume;
+            int minVolume = 1;
             while (!stopped) {
                 int response = 0;
 
                 // Adjust tone volume
-                if (minVolume > 0) {
+                if (minVolume > 1) {
                     // In a slower manner after a tone is not heard
                     actualVolume = (minVolume + maxVolume) / 2;
                 } else {
                     // In a faster manner until tone is not heard for the first time
-                    actualVolume = (2 * minVolume + maxVolume) / 3;
+                    actualVolume = (maxVolume) / 3;
                 }
 
                 if (actualVolume <= 1) {
@@ -192,8 +191,8 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
                 }
 
                 // Return threshold value if difference between min and max volume is less than 3dB
-                if (minVolume > 0 && ((float) maxVolume / (float) minVolume) < Math.sqrt(2)) {
-                    return 20 * Math.log10(thresVolume);
+                if (((float) maxVolume / (float) minVolume) < Math.sqrt(2)) {
+                    return 20 * Math.log10(maxVolume);
                 } else {
                     //iterate same tone three times
                     for (int z = 0; z < 3; z++) {
@@ -217,11 +216,10 @@ public class HearingTestUI extends AppCompatActivity implements View.OnClickList
                     }
                     // Reduce maxVolume if there are at least 2 responses
                     if (response >= 2) {
-                        thresVolume = actualVolume;
                         maxVolume = actualVolume;
                     } else {
                         // Increase minVolume when a tone is not heard
-                        if (minVolume > 0) {
+                        if (minVolume > 1) {
                             minVolume = actualVolume;
                         } else {
                             // Set minVolume to be 3dB below actualVolume when a tone is not heard for first time
