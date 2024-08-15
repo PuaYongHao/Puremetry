@@ -1,0 +1,1 @@
+An Android application, which is developed in Java programming language, that provides hearing ability assessment to let the users gain a better understanding of their hearing capability and aims to allow early detection of hearing loss.
